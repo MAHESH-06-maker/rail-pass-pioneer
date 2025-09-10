@@ -2,17 +2,38 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowRight, Users, Shield, Clock, CheckCircle, Train, GraduationCap, FileCheck } from "lucide-react";
 import { Link } from "react-router-dom";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import railwayHero from "@/assets/railway-hero.jpg";
 import digitalProcess from "@/assets/digital-process.jpg";
 import dashboardMockup from "@/assets/dashboard-mockup.jpg";
 
 const Index = () => {
+  const heroRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"]
+  });
+  
+  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <header className="bg-card/80 backdrop-blur-md border-b sticky top-0 z-50">
+      <motion.header 
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="bg-card/80 backdrop-blur-md border-b sticky top-0 z-50"
+      >
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="flex items-center space-x-3">
+          <motion.div 
+            initial={{ x: -50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex items-center space-x-3"
+          >
             <div className="w-10 h-10 rounded-lg bg-gradient-primary flex items-center justify-center">
               <Train className="w-6 h-6 text-primary-foreground" />
             </div>
@@ -20,8 +41,13 @@ const Index = () => {
               <h2 className="font-bold text-lg text-primary">RailConcession</h2>
               <p className="text-xs text-muted-foreground">Digital Railway Pass System</p>
             </div>
-          </div>
-          <nav className="hidden md:flex space-x-6">
+          </motion.div>
+          <motion.nav 
+            initial={{ x: 50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="hidden md:flex space-x-6"
+          >
             <Link to="/login" className="text-foreground hover:text-primary transition-colors">
               Login
             </Link>
@@ -31,91 +57,146 @@ const Index = () => {
             <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">
               Contact
             </Link>
-          </nav>
+          </motion.nav>
         </div>
-      </header>
+      </motion.header>
 
       {/* Hero Section */}
-      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
+      <section ref={heroRef} className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+        <motion.div 
+          style={{ y: heroY, opacity: heroOpacity }}
+          className="absolute inset-0 z-0"
+        >
           <img 
             src={railwayHero} 
             alt="Modern railway station" 
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-background/95 to-background/70"></div>
-        </div>
+        </motion.div>
         
         <div className="relative z-10 container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
-          <div className="animate-fade-in">
-            <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+          <motion.div 
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <motion.h1 
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-5xl lg:text-6xl font-bold mb-6 leading-tight"
+            >
               Digital Railway
               <span className="text-primary block">Concession System</span>
-            </h1>
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="text-xl text-muted-foreground mb-8 leading-relaxed"
+            >
               Streamlined, paperless railway pass management for students and colleges. 
               Apply, approve, and manage railway concessions digitally with our secure platform.
-            </p>
+            </motion.p>
             
-            <div className="flex flex-col sm:flex-row gap-4 mb-8">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="flex flex-col sm:flex-row gap-4 mb-8"
+            >
               <Link to="/login/student">
-                <Button size="lg" className="btn-hero w-full sm:w-auto">
-                  <GraduationCap className="w-5 h-5 mr-2" />
-                  Login as Student
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Button>
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
+                  <Button size="lg" className="btn-hero w-full sm:w-auto">
+                    <GraduationCap className="w-5 h-5 mr-2" />
+                    Login as Student
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </Button>
+                </motion.div>
               </Link>
               <Link to="/login/admin">
-                <Button variant="outline" size="lg" className="btn-outline-success w-full sm:w-auto">
-                  <Shield className="w-5 h-5 mr-2" />
-                  College Admin Login
-                </Button>
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
+                  <Button size="lg" className="btn-hero w-full sm:w-auto">
+                    <Shield className="w-5 h-5 mr-2" />
+                    College Admin Login
+                  </Button>
+                </motion.div>
               </Link>
-            </div>
+            </motion.div>
 
-            <div className="flex items-center gap-6 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1 }}
+              className="flex items-center gap-6 text-sm text-muted-foreground"
+            >
+              <motion.div 
+                whileHover={{ scale: 1.1 }}
+                className="flex items-center gap-2"
+              >
                 <CheckCircle className="w-4 h-4 text-success" />
                 <span>100% Digital Process</span>
-              </div>
-              <div className="flex items-center gap-2">
+              </motion.div>
+              <motion.div 
+                whileHover={{ scale: 1.1 }}
+                className="flex items-center gap-2"
+              >
                 <CheckCircle className="w-4 h-4 text-success" />
                 <span>Instant Approvals</span>
-              </div>
-              <div className="flex items-center gap-2">
+              </motion.div>
+              <motion.div 
+                whileHover={{ scale: 1.1 }}
+                className="flex items-center gap-2"
+              >
                 <CheckCircle className="w-4 h-4 text-success" />
                 <span>Secure & Verified</span>
-              </div>
-            </div>
-          </div>
+              </motion.div>
+            </motion.div>
+          </motion.div>
 
-          <div className="animate-slide-up lg:block hidden">
+          <motion.div 
+            initial={{ opacity: 0, x: 100, rotateY: -15 }}
+            animate={{ opacity: 1, x: 0, rotateY: 0 }}
+            transition={{ duration: 1, delay: 0.4 }}
+            className="lg:block hidden"
+          >
             <div className="relative">
-              <img 
+              <motion.img 
+                whileHover={{ scale: 1.02, rotateY: 5 }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 src={dashboardMockup} 
                 alt="Dashboard preview" 
-                className="rounded-xl shadow-elegant hover-lift"
+                className="rounded-xl shadow-elegant"
               />
-              <div className="absolute -bottom-4 -left-4 bg-card p-4 rounded-lg shadow-card animate-pulse-subtle">
-                <div className="flex items-center gap-2 text-sm">
-                  <div className="w-2 h-2 bg-success rounded-full"></div>
-                  <span className="text-muted-foreground">System Status: Active</span>
-                </div>
-              </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Features Section */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-16 animate-fade-in">
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true, amount: 0.3 }}
+            className="text-center mb-16"
+          >
             <h2 className="text-4xl font-bold mb-4">Why Choose Our Platform?</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Experience the future of railway concession management with our comprehensive digital solution.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
@@ -156,13 +237,26 @@ const Index = () => {
                 color: "text-accent"
               }
             ].map((feature, index) => (
-              <Card key={index} className="p-6 hover-lift animate-scale-in card-elegant" style={{animationDelay: `${index * 100}ms`}}>
-                <div className={`w-12 h-12 rounded-lg bg-${feature.color.split('-')[1]}/10 flex items-center justify-center mb-4`}>
-                  <feature.icon className={`w-6 h-6 ${feature.color}`} />
-                </div>
-                <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
-              </Card>
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50, rotateX: -15 }}
+                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                whileHover={{ y: -8, rotateX: 5 }}
+              >
+                <Card className="p-6 card-elegant h-full">
+                  <motion.div 
+                    whileHover={{ rotate: 360, scale: 1.1 }}
+                    transition={{ duration: 0.6 }}
+                    className={`w-12 h-12 rounded-lg bg-${feature.color.split('-')[1]}/10 flex items-center justify-center mb-4`}
+                  >
+                    <feature.icon className={`w-6 h-6 ${feature.color}`} />
+                  </motion.div>
+                  <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -172,7 +266,12 @@ const Index = () => {
       <section className="py-20">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="animate-fade-in">
+            <motion.div 
+              initial={{ opacity: 0, x: -100 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true, amount: 0.3 }}
+            >
               <h2 className="text-4xl font-bold mb-6">Simple Digital Process</h2>
               <p className="text-xl text-muted-foreground mb-8">
                 Our streamlined workflow makes railway concession applications faster and more transparent than ever before.
@@ -201,98 +300,195 @@ const Index = () => {
                     description: "Students present digital passes at railway stations for quick verification and concession benefits."
                   }
                 ].map((item, index) => (
-                  <div key={index} className="flex gap-4 animate-slide-up" style={{animationDelay: `${index * 150}ms`}}>
-                    <div className="w-12 h-12 rounded-full bg-gradient-primary text-primary-foreground flex items-center justify-center font-bold flex-shrink-0">
+                  <motion.div 
+                    key={index} 
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.15 }}
+                    viewport={{ once: true, amount: 0.8 }}
+                    whileHover={{ x: 10, scale: 1.02 }}
+                    className="flex gap-4"
+                  >
+                    <motion.div 
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      className="w-12 h-12 rounded-full bg-gradient-primary text-primary-foreground flex items-center justify-center font-bold flex-shrink-0"
+                    >
                       {item.step}
-                    </div>
+                    </motion.div>
                     <div>
                       <h4 className="font-semibold text-lg mb-2">{item.title}</h4>
                       <p className="text-muted-foreground">{item.description}</p>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
-            <div className="animate-scale-in">
+            <motion.div 
+              initial={{ opacity: 0, x: 100, rotateY: 15 }}
+              whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+              transition={{ duration: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              whileHover={{ scale: 1.02, rotateY: -5 }}
+            >
               <img 
                 src={digitalProcess} 
                 alt="Digital process illustration" 
-                className="rounded-xl shadow-elegant hover-lift"
+                className="rounded-xl shadow-elegant"
               />
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-primary text-primary-foreground">
-        <div className="container mx-auto px-6 text-center animate-fade-in">
-          <h2 className="text-4xl font-bold mb-6">Ready to Go Digital?</h2>
-          <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true, amount: 0.3 }}
+          className="container mx-auto px-6 text-center"
+        >
+          <motion.h2 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-4xl font-bold mb-6"
+          >
+            Ready to Go Digital?
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="text-xl mb-8 opacity-90 max-w-2xl mx-auto"
+          >
             Join thousands of students and colleges already using our platform for seamless railway concession management.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          </motion.p>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            viewport={{ once: true }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
             <Link to="/register/student">
-              <Button variant="secondary" size="lg" className="w-full sm:w-auto">
-                <GraduationCap className="w-5 h-5 mr-2" />
-                Register as Student
-              </Button>
+              <motion.div
+                whileHover={{ scale: 1.05, y: -3 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              >
+                <Button variant="secondary" size="lg" className="w-full sm:w-auto">
+                  <GraduationCap className="w-5 h-5 mr-2" />
+                  Register as Student
+                </Button>
+              </motion.div>
             </Link>
             <Link to="/register/admin">
-              <Button variant="outline" size="lg" className="w-full sm:w-auto border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-                <Shield className="w-5 h-5 mr-2" />
-                Register as College Admin
-              </Button>
+              <motion.div
+                whileHover={{ scale: 1.05, y: -3 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              >
+                <Button size="lg" className="w-full sm:w-auto bg-background text-primary border-0 hover:bg-background/90">
+                  <Shield className="w-5 h-5 mr-2" />
+                  Register as College Admin
+                </Button>
+              </motion.div>
             </Link>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-card border-t py-12">
+      <motion.footer 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true, amount: 0.1 }}
+        className="bg-card border-t py-12"
+      >
         <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, staggerChildren: 0.1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            className="grid md:grid-cols-4 gap-8"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
               <div className="flex items-center space-x-3 mb-4">
-                <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
+                <motion.div 
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.6 }}
+                  className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center"
+                >
                   <Train className="w-5 h-5 text-primary-foreground" />
-                </div>
+                </motion.div>
                 <h3 className="font-bold text-lg">RailConcession</h3>
               </div>
               <p className="text-muted-foreground text-sm">
                 Revolutionizing railway concession management through digital innovation and secure technology.
               </p>
-            </div>
-            <div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+            >
               <h4 className="font-semibold mb-4">Quick Links</h4>
               <div className="space-y-2 text-sm">
                 <Link to="/about" className="text-muted-foreground hover:text-primary transition-colors block">About Us</Link>
                 <Link to="/features" className="text-muted-foreground hover:text-primary transition-colors block">Features</Link>
                 <Link to="/pricing" className="text-muted-foreground hover:text-primary transition-colors block">Pricing</Link>
               </div>
-            </div>
-            <div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
               <h4 className="font-semibold mb-4">Support</h4>
               <div className="space-y-2 text-sm">
                 <Link to="/help" className="text-muted-foreground hover:text-primary transition-colors block">Help Center</Link>
                 <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors block">Contact</Link>
                 <Link to="/faq" className="text-muted-foreground hover:text-primary transition-colors block">FAQ</Link>
               </div>
-            </div>
-            <div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
               <h4 className="font-semibold mb-4">Legal</h4>
               <div className="space-y-2 text-sm">
                 <Link to="/privacy" className="text-muted-foreground hover:text-primary transition-colors block">Privacy Policy</Link>
                 <Link to="/terms" className="text-muted-foreground hover:text-primary transition-colors block">Terms of Service</Link>
               </div>
-            </div>
-          </div>
-          <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
+            </motion.div>
+          </motion.div>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground"
+          >
             <p>&copy; 2024 RailConcession System. All rights reserved.</p>
-          </div>
+          </motion.div>
         </div>
-      </footer>
+      </motion.footer>
     </div>
   );
 };
