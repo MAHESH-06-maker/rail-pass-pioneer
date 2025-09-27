@@ -115,7 +115,7 @@ const LoginPage = () => {
                 </Button>
               </form>
 
-              <div className="mt-6">
+                <div className="mt-6">
                 <Separator className="mb-4" />
                 <p className="text-center text-sm text-muted-foreground">
                   Don't have an account?{" "}
@@ -178,7 +178,7 @@ const LoginPage = () => {
                 <Separator className="mb-4" />
                 <p className="text-center text-sm text-muted-foreground">
                   Don't have admin access?{" "}
-                  <Link to="/register/admin" className="text-primary hover:underline font-medium">
+                  <Link to="/register/college" className="text-primary hover:underline font-medium">
                     Register College
                   </Link>
                 </p>

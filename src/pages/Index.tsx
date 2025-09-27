@@ -38,26 +38,10 @@ const Index = () => {
               <Train className="w-6 h-6 text-primary-foreground" />
             </div>
             <div>
-              <h2 className="font-bold text-lg text-primary">RailConcession</h2>
+              <h2 className="font-bold text-lg text-primary">RailPass</h2>
               <p className="text-xs text-muted-foreground">Digital Railway Pass System</p>
             </div>
           </motion.div>
-          <motion.nav 
-            initial={{ x: 50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="hidden md:flex space-x-6"
-          >
-            <Link to="/login" className="text-foreground hover:text-primary transition-colors">
-              Login
-            </Link>
-            <Link to="/about" className="text-muted-foreground hover:text-primary transition-colors">
-              About
-            </Link>
-            <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">
-              Contact
-            </Link>
-          </motion.nav>
         </div>
       </motion.header>
 
@@ -415,77 +399,23 @@ const Index = () => {
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, staggerChildren: 0.1 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true, amount: 0.3 }}
-            className="grid md:grid-cols-4 gap-8"
+            className="text-center"
           >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <div className="flex items-center space-x-3 mb-4">
-                <motion.div 
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.6 }}
-                  className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center"
-                >
-                  <Train className="w-5 h-5 text-primary-foreground" />
-                </motion.div>
-                <h3 className="font-bold text-lg">RailConcession</h3>
-              </div>
-              <p className="text-muted-foreground text-sm">
-                Revolutionizing railway concession management through digital innovation and secure technology.
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              <h4 className="font-semibold mb-4">Quick Links</h4>
-              <div className="space-y-2 text-sm">
-                <Link to="/about" className="text-muted-foreground hover:text-primary transition-colors block">About Us</Link>
-                <Link to="/features" className="text-muted-foreground hover:text-primary transition-colors block">Features</Link>
-                <Link to="/pricing" className="text-muted-foreground hover:text-primary transition-colors block">Pricing</Link>
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <h4 className="font-semibold mb-4">Support</h4>
-              <div className="space-y-2 text-sm">
-                <Link to="/help" className="text-muted-foreground hover:text-primary transition-colors block">Help Center</Link>
-                <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors block">Contact</Link>
-                <Link to="/faq" className="text-muted-foreground hover:text-primary transition-colors block">FAQ</Link>
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              <h4 className="font-semibold mb-4">Legal</h4>
-              <div className="space-y-2 text-sm">
-                <Link to="/privacy" className="text-muted-foreground hover:text-primary transition-colors block">Privacy Policy</Link>
-                <Link to="/terms" className="text-muted-foreground hover:text-primary transition-colors block">Terms of Service</Link>
-              </div>
-            </motion.div>
-          </motion.div>
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground"
-          >
-            <p>&copy; 2024 RailConcession System. All rights reserved.</p>
+            <div className="flex items-center justify-center space-x-3 mb-4">
+              <motion.div 
+                whileHover={{ rotate: 360 }}
+                transition={{ duration: 0.6 }}
+                className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center"
+              >
+                <Train className="w-5 h-5 text-primary-foreground" />
+              </motion.div>
+              <h3 className="font-bold text-xl">RailPass</h3>
+            </div>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Revolutionizing railway concession management through digital innovation and secure technology.
+            </p>
           </motion.div>
         </div>
       </motion.footer>

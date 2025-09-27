@@ -8,6 +8,9 @@ import NotFound from "./pages/NotFound";
 import LoginPage from "./pages/LoginPage";
 import StudentDashboard from "./pages/StudentDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
+import StudentRegistration from "./pages/StudentRegistration";
+import CollegeRegistration from "./pages/CollegeRegistration";
+import NewApplication from "./pages/NewApplication";
 
 const queryClient = new QueryClient();
 
@@ -22,8 +25,11 @@ const App = () => (
           <Route path="/login" element={<LoginPage />} />
           <Route path="/login/student" element={<LoginPage />} />
           <Route path="/login/admin" element={<LoginPage />} />
+          <Route path="/register/student" element={<StudentRegistration />} />
+          <Route path="/register/college" element={<CollegeRegistration />} />
           <Route path="/dashboard/student" element={<StudentDashboard />} />
           <Route path="/dashboard/admin" element={<AdminDashboard />} />
+          <Route path="/apply" element={<NewApplication />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

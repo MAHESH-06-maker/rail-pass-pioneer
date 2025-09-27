@@ -110,7 +110,7 @@ const AdminDashboard = () => {
             </div>
             <div>
               <h2 className="font-bold text-lg">College Admin Dashboard</h2>
-              <p className="text-xs text-muted-foreground">MIT College of Engineering</p>
+              <p className="text-xs text-muted-foreground">Vidyavardhini College of Engineering and Technology</p>
             </div>
           </div>
           <div className="flex items-center gap-4">
@@ -202,18 +202,20 @@ const AdminDashboard = () => {
                           <h3 className="font-semibold text-lg">{app.studentName}</h3>
                           <Badge variant="outline">#{app.studentId}</Badge>
                         </div>
-                        <div className="grid grid-cols-2 gap-4 text-sm text-muted-foreground">
-                          <div>
-                            <span className="font-medium">Route:</span> {app.route}
-                          </div>
-                          <div>
-                            <span className="font-medium">Class:</span> {app.class}
-                          </div>
-                          <div>
-                            <span className="font-medium">Duration:</span> {app.duration}
-                          </div>
-                          <div>
-                            <span className="font-medium">Applied:</span> {app.appliedDate}
+                        <div className="mb-4">
+                          <div className="grid grid-cols-2 gap-4 text-sm text-muted-foreground">
+                            <div>
+                              <span className="font-medium">Route:</span> {app.route}
+                            </div>
+                            <div>
+                              <span className="font-medium">Class:</span> {app.class}
+                            </div>
+                            <div>
+                              <span className="font-medium">Duration:</span> {app.duration}
+                            </div>
+                            <div>
+                              <span className="font-medium">Applied On:</span> {app.appliedDate}
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -221,17 +223,6 @@ const AdminDashboard = () => {
                         <Clock className="w-3 h-3 mr-1" />
                         Pending Review
                       </Badge>
-                    </div>
-
-                    <div className="mb-4">
-                      <p className="text-sm font-medium mb-2">Submitted Documents:</p>
-                      <div className="flex gap-2">
-                        {app.documents.map((doc) => (
-                          <Badge key={doc} variant="secondary" className="text-xs">
-                            {doc}
-                          </Badge>
-                        ))}
-                      </div>
                     </div>
 
                     <div className="flex justify-between items-center pt-4 border-t">
@@ -301,14 +292,20 @@ const AdminDashboard = () => {
                 <Card className="p-6 card-elegant">
                   <div className="text-center py-8">
                     <FileText className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-                    <h3 className="font-semibold text-lg mb-2">Reports & Analytics</h3>
+                    <h3 className="font-semibold text-lg mb-2">Monthly Reports</h3>
                     <p className="text-muted-foreground mb-4">
-                      Generate detailed reports on student applications and system usage.
+                      Monthly-wise report of approved and rejected students.
                     </p>
-                    <Button className="btn-hero">
-                      <Download className="w-4 h-4 mr-2" />
-                      Generate Report
-                    </Button>
+                    <div className="space-y-2">
+                      <Button variant="outline" className="w-full">
+                        <Download className="w-4 h-4 mr-2" />
+                        Download January Report
+                      </Button>
+                      <Button variant="outline" className="w-full">
+                        <Download className="w-4 h-4 mr-2" />
+                        Download February Report
+                      </Button>
+                    </div>
                   </div>
                 </Card>
               </TabsContent>
@@ -322,35 +319,12 @@ const AdminDashboard = () => {
               <h3 className="font-semibold text-lg mb-4">Quick Actions</h3>
               <div className="space-y-3">
                 <Button variant="outline" className="w-full justify-start">
-                  <FileText className="w-4 h-4 mr-2" />
-                  Generate Digital Letter
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
                   <Users className="w-4 h-4 mr-2" />
                   Verify Student Records
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
-                  <Download className="w-4 h-4 mr-2" />
-                  Export Applications
                 </Button>
               </div>
             </Card>
 
-            {/* System Alert */}
-            <Card className="p-6 card-elegant border-warning bg-warning/5">
-              <div className="flex items-start gap-3">
-                <AlertTriangle className="w-5 h-5 text-warning mt-0.5" />
-                <div>
-                  <h4 className="font-semibold text-warning mb-2">System Maintenance</h4>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    Scheduled system maintenance on Sunday, 2:00 AM - 4:00 AM IST.
-                  </p>
-                  <Button size="sm" variant="outline">
-                    Learn More
-                  </Button>
-                </div>
-              </div>
-            </Card>
 
             {/* Recent Activity */}
             <Card className="p-6 card-elegant">

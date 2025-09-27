@@ -103,7 +103,7 @@ const StudentDashboard = () => {
       <div className="container mx-auto px-6 py-8">
         {/* Welcome Section */}
         <div className="mb-8 animate-fade-in">
-          <h1 className="text-3xl font-bold mb-2">Welcome back, Rahul!</h1>
+          <h1 className="text-3xl font-bold mb-2">Welcome back, [username]!</h1>
           <p className="text-muted-foreground">Manage your railway concession applications and track their status.</p>
         </div>
 
@@ -248,10 +248,6 @@ const StudentDashboard = () => {
                     Update Profile
                   </Button>
                 </Link>
-                <Button variant="outline" className="w-full justify-start">
-                  <Bell className="w-4 h-4 mr-2" />
-                  Notification Settings
-                </Button>
               </div>
             </Card>
 
