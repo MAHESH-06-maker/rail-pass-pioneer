@@ -26,31 +26,31 @@ const StudentDashboard = () => {
   const [applications, setApplications] = useState([
     {
       id: "RP001",
-      route: "Mumbai Central → Pune Junction",
+      route: "Malad  → Vasai Road",
       class: "Second Class",
       duration: "Monthly",
       status: "approved",
-      appliedDate: "2024-01-15",
-      validUntil: "2024-02-15",
+      appliedDate: "2025-01-15",
+      validUntil: "2025-02-15",
       progress: 100
     },
     {
       id: "RP002", 
-      route: "Pune Junction → Mumbai Central",
+      route: "Goregaon → Vasai Road",
       class: "First Class",
       duration: "Quarterly",
       status: "pending",
-      appliedDate: "2024-01-20",
+      appliedDate: "2025-01-20",
       validUntil: "N/A",
       progress: 60
     },
     {
       id: "RP003",
-      route: "Delhi → Chandigarh",
+      route: "Virar → Vasai Road",
       class: "Second Class", 
       duration: "Monthly",
       status: "rejected",
-      appliedDate: "2024-01-10",
+      appliedDate: "2025-01-10",
       validUntil: "N/A",
       progress: 100
     }
@@ -93,9 +93,11 @@ const StudentDashboard = () => {
               <Bell className="w-5 h-5" />
               <span className="absolute -top-1 -right-1 w-3 h-3 bg-destructive rounded-full text-xs"></span>
             </Button>
+            <Link to ="/">
             <Button variant="ghost" size="sm">
               <LogOut className="w-5 h-5" />
             </Button>
+            </Link>
           </div>
         </div>
       </header>
@@ -103,7 +105,7 @@ const StudentDashboard = () => {
       <div className="container mx-auto px-6 py-8">
         {/* Welcome Section */}
         <div className="mb-8 animate-fade-in">
-          <h1 className="text-3xl font-bold mb-2">Welcome back, [username]!</h1>
+          <h1 className="text-3xl font-bold mb-2">Welcome back</h1>
           <p className="text-muted-foreground">Manage your railway concession applications and track their status.</p>
         </div>
 
@@ -156,10 +158,12 @@ const StudentDashboard = () => {
                   <TabsTrigger value="applications">My Applications</TabsTrigger>
                   <TabsTrigger value="history">History</TabsTrigger>
                 </TabsList>
+                <Link to ="/apply">
                 <Button className="btn-hero">
                   <Plus className="w-4 h-4 mr-2" />
                   New Application
                 </Button>
+                </Link>
               </div>
 
               <TabsContent value="applications" className="space-y-4">
@@ -242,7 +246,7 @@ const StudentDashboard = () => {
                     Apply for New Pass
                   </Button>
                 </Link>
-                <Link to="/profile">
+                <Link to="/Profile">
                   <Button variant="outline" className="w-full justify-start">
                     <User className="w-4 h-4 mr-2" />
                     Update Profile
@@ -258,11 +262,13 @@ const StudentDashboard = () => {
                 <div>
                   <h4 className="font-semibold text-warning mb-2">Renewal Reminder</h4>
                   <p className="text-sm text-muted-foreground mb-3">
-                    Your Mumbai-Pune pass expires in 15 days. Renew now to avoid interruption.
+                    Your Malad - Vasai Road pass expires in 15 days. Renew now to avoid interruption.
                   </p>
+                  <Link to = "/apply">
                   <Button size="sm" className="btn-hero">
                     Renew Now
                   </Button>
+                  </Link>
                 </div>
               </div>
             </Card>
@@ -275,7 +281,7 @@ const StudentDashboard = () => {
                   <div className="w-2 h-2 rounded-full bg-success mt-2"></div>
                   <div className="text-sm">
                     <p className="font-medium">Application Approved</p>
-                    <p className="text-muted-foreground">Your railway pass for Mumbai-Pune route has been approved.</p>
+                    <p className="text-muted-foreground">Your railway pass for Malad - Vasai route has been approved.</p>
                     <p className="text-xs text-muted-foreground mt-1">2 hours ago</p>
                   </div>
                 </div>

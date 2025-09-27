@@ -11,6 +11,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import StudentRegistration from "./pages/StudentRegistration";
 import CollegeRegistration from "./pages/CollegeRegistration";
 import NewApplication from "./pages/NewApplication";
+import Profile  from "./pages/Profile";
 
 const queryClient = new QueryClient();
 
@@ -30,8 +31,10 @@ const App = () => (
           <Route path="/dashboard/student" element={<StudentDashboard />} />
           <Route path="/dashboard/admin" element={<AdminDashboard />} />
           <Route path="/apply" element={<NewApplication />} />
+           <Route path="/Profile" element= {< Profile/>}/>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
+      
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

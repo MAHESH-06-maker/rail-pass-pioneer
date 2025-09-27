@@ -371,7 +371,7 @@ const Index = () => {
                 </Button>
               </motion.div>
             </Link>
-            <Link to="/register/admin">
+            <Link to="/register/college">
               <motion.div
                 whileHover={{ scale: 1.05, y: -3 }}
                 whileTap={{ scale: 0.95 }}
