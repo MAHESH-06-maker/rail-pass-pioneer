@@ -15,27 +15,29 @@ import {
   Shield,
   Download,
   Eye,
-  MoreHorizontal,
   Train,
   Bell,
-  LogOut,
-  AlertTriangle
+  LogOut
 } from "lucide-react";
+import { Link  } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 
 const AdminDashboard = () => {
   const { toast } = useToast();
+
+  // Pending applications (default data)
   const [pendingApplications, setPendingApplications] = useState([
     {
       id: "RP002",
       studentName: "Priya Sharma",
       studentId: "CS2021001", 
-      route: "Pune Junction → Mumbai Central",
+      route: "Mira Road → Vasai Road",
       class: "First Class",
       duration: "Quarterly",
-      appliedDate: "2024-01-20",
-      documents: ["Student ID", "Fee Receipt", "Marksheet"],
-      email: "priya.sharma@college.edu"
+      appliedDate: "2025-01-20",
+      email: "priya.sharma@college.edu",
+      course: "Computer Science",
+      year: "3rd Year",
     },
     {
       id: "RP004",
@@ -45,8 +47,9 @@ const AdminDashboard = () => {
       class: "Second Class",
       duration: "Monthly",
       appliedDate: "2024-01-22",
-      documents: ["Student ID", "Fee Receipt"],
-      email: "arjun.patel@college.edu"
+      email: "arjun.patel@college.edu",
+      course: "Mechanical Engineering",
+      year: "3rd Year",
     },
     {
       id: "RP005",
@@ -56,37 +59,37 @@ const AdminDashboard = () => {
       class: "Second Class", 
       duration: "Monthly",
       appliedDate: "2024-01-23",
-      documents: ["Student ID", "Fee Receipt", "Marksheet"],
-      email: "sneha.reddy@college.edu"
+      email: "sneha.reddy@college.edu",
+      course: "Information Technology",
+      year: "2nd Year",
     }
   ]);
 
-  const [verifiedStudents] = useState([
-    {
-      id: "CS2021001",
-      name: "Priya Sharma",
-      email: "priya.sharma@college.edu",
-      course: "Computer Science",
-      year: "3rd Year",
-      status: "Active",
-      totalPasses: 5
-    },
-    {
-      id: "ME2021003", 
-      name: "Arjun Patel",
-      email: "arjun.patel@college.edu",
-      course: "Mechanical Engineering",
-      year: "3rd Year", 
-      status: "Active",
-      totalPasses: 3
-    }
-  ]);
+  // Verified students (empty initially)
+  const [verifiedStudents, setVerifiedStudents] = useState<any[]>([]);
 
   const handleApprove = (applicationId: string) => {
+    const approvedApp = pendingApplications.find(app => app.id === applicationId);
+    if (approvedApp) {
+      setVerifiedStudents(prev => [
+        ...prev,
+        {
+          id: approvedApp.studentId,
+          name: approvedApp.studentName,
+          email: approvedApp.email,
+          course: approvedApp.course,
+          year: approvedApp.year,
+          status: "Active",
+          totalPasses: 0,
+        }
+      ]);
+    }
+
     setPendingApplications(prev => prev.filter(app => app.id !== applicationId));
+
     toast({
       title: "Application Approved",
-      description: "Digital railway pass has been generated and sent to the student.",
+      description: "Student has been moved to verified list.",
     });
   };
 
@@ -118,9 +121,11 @@ const AdminDashboard = () => {
               <Bell className="w-5 h-5" />
               <span className="absolute -top-1 -right-1 w-3 h-3 bg-destructive rounded-full text-xs"></span>
             </Button>
-            <Button variant="ghost" size="sm">
-              <LogOut className="w-5 h-5" />
-            </Button>
+            <Link to = "/">
+              <Button variant="ghost" size="sm">
+                <LogOut className="w-5 h-5" />
+              </Button>
+            </Link>
           </div>
         </div>
       </header>
@@ -193,6 +198,7 @@ const AdminDashboard = () => {
                 </div>
               </div>
 
+              {/* Pending Applications */}
               <TabsContent value="pending" className="space-y-4">
                 {pendingApplications.map((app) => (
                   <Card key={app.id} className="p-6 card-elegant hover-lift">
@@ -254,6 +260,7 @@ const AdminDashboard = () => {
                 ))}
               </TabsContent>
 
+              {/* Verified Students */}
               <TabsContent value="students" className="space-y-4">
                 {verifiedStudents.map((student) => (
                   <Card key={student.id} className="p-6 card-elegant hover-lift">
@@ -280,14 +287,17 @@ const AdminDashboard = () => {
                           </div>
                         </div>
                       </div>
-                      <Button variant="outline" size="sm">
-                        <MoreHorizontal className="w-4 h-4" />
+                      <td className="px-6 py-4 text-sm">
+                      <Button className="bg-primary hover:bg-primary/90 text-white">
+                        Generate Pass
                       </Button>
+                      </td>
                     </div>
                   </Card>
                 ))}
               </TabsContent>
 
+              {/* Reports */}
               <TabsContent value="reports">
                 <Card className="p-6 card-elegant">
                   <div className="text-center py-8">
@@ -324,7 +334,6 @@ const AdminDashboard = () => {
                 </Button>
               </div>
             </Card>
-
 
             {/* Recent Activity */}
             <Card className="p-6 card-elegant">
