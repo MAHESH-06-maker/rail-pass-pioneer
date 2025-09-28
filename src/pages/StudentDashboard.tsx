@@ -247,7 +247,7 @@ const StudentDashboard = () => {
                   </Button>
                 </Link>
                 <Link to="/Profile">
-                  <Button variant="outline" className="w-full justify-start">
+                  <Button variant="outline" className="w-full justify-start transition-all duration-300 hover:scale-105 hover:shadow-lg hover:bg-primary/10">
                     <User className="w-4 h-4 mr-2" />
                     Update Profile
                   </Button>
